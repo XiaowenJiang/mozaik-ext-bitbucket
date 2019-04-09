@@ -8,7 +8,7 @@ import { icon as iconHelper }          from './WeatherCodeHelper';
 
 // see http://openweathermap.org/weather-conditions for `weather.id` meaning
 
-class Weather extends Component {
+class Julie extends Component {
     constructor(props) {
         super(props);
 
@@ -88,9 +88,9 @@ class Weather extends Component {
     }
 }
 
-Weather.displayName = 'Weather';
+Julie.displayName = 'Julie';
 
-Weather.propTypes = {
+Julie.propTypes = {
     city:    PropTypes.string.isRequired,
     country: PropTypes.string.isRequired,
     limit:   PropTypes.number.isRequired,
@@ -117,13 +117,13 @@ Weather.propTypes = {
     ]).isRequired
 };
 
-Weather.defaultProps = {
+Julie.defaultProps = {
     lang:  'en',
     limit: 3
 };
 
-reactMixin(Weather.prototype, ListenerMixin);
-reactMixin(Weather.prototype, Mozaik.Mixin.ApiConsumer);
+reactMixin(Julie.prototype, ListenerMixin);
+reactMixin(Julie.prototype, Mozaik.Mixin.ApiConsumer);
 
 
-export default Weather;
+export default Julie;

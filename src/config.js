@@ -2,12 +2,12 @@ import convict from 'convict';
 
 
 const config = convict({
-    weather: {
+    julie: {
         apiToken: {
-            doc:     'The weather API token',
+            doc:     'The julie API token',
             default: null,
             format:  String,
-            env:     'WEATHER_API_TOKEN'
+            env:     'julie_API_TOKEN'
         }
     }
 });

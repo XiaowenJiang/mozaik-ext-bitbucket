@@ -14,7 +14,7 @@ const API_BASE_URL = 'http://api.openweathermap.org/data/2.5';
 const client = mozaik => {
     mozaik.loadApiConfig(config);
 
-    const token = config.get('weather.apiToken');
+    const token = config.get('julie.apiToken');
 
     const methods = {
         current(params) {

@@ -1,6 +1,6 @@
-import Weather from './Weather.jsx';
+import Julie from './Julie.jsx';
 
 
 export default {
-    Weather
+    Julie
 };
