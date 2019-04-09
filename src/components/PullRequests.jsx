@@ -4,7 +4,7 @@ import { ListenerMixin }               from 'reflux';
 import Mozaik                          from 'mozaik/browser';
 import PullRequest                     from './PullRequest.jsx';
 
-class Julie extends Component {
+class PullRequests extends Component {
     constructor(props) {
         super(props);
 
@@ -20,7 +20,7 @@ class Julie extends Component {
             repo
         };
 
-        return { id: `julie.sample`,
+        return { id: `bitbucket.pullrequests`,
                  params: params
         };
     }
@@ -54,19 +54,15 @@ class Julie extends Component {
     }
 }
 
-Julie.displayName = 'Julie';
+PullRequests.displayName = 'PullRequests';
 
-Julie.propTypes = {
+PullRequests.propTypes = {
     project: PropTypes.string.isRequired,
     repo: PropTypes.string.isRequired
 };
 
-Julie.defaultProps = {
-    project: 'FFV'
-};
-
-reactMixin(Julie.prototype, ListenerMixin);
-reactMixin(Julie.prototype, Mozaik.Mixin.ApiConsumer);
+reactMixin(PullRequests.prototype, ListenerMixin);
+reactMixin(PullRequests.prototype, Mozaik.Mixin.ApiConsumer);
 
 
-export default Julie;
+export default PullRequests;

@@ -1,10 +1,10 @@
 {
-  "name": "mozaik-ext-julie",
+  "name": "mozaik-ext-bitbucket",
   "version": "1.2.0",
-  "description": "Mozaik julie widgets",
+  "description": "Mozaik bitbucket widgets",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xiaowenjiang/mozaik-ext-julie"
+    "url": "https://github.com/xiaowenjiang/mozaik-ext-bitbucket"
   },
   "license": "MIT",
   "author": {
@@ -15,10 +15,10 @@
     "node": ">=0.12.x",
     "npm": ">=3.0.0"
   },
-  "homepage": "https://github.com/xiaowenjiang/mozaik-ext-julie",
+  "homepage": "https://github.com/xiaowenjiang/mozaik-ext-bitbucket",
   "main": "./src/components/index.js",
   "keywords": [
-    "julie",
+    "bitbucket",
     "meteo",
     "mozaik",
     "widget",

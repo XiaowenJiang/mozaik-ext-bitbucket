@@ -1,6 +1,6 @@
-import Julie from './Julie.jsx';
+import PullRequests from './PullRequests.jsx';
 
 
 export default {
-    Julie
+    PullRequests
 };

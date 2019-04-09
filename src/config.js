@@ -2,24 +2,24 @@ import convict from 'convict';
 
 
 const config = convict({
-    julie: {
+    bitbucket: {
         baseUrl: {
             doc:     'The bitbucket API base url.',
             default: null,
             format:  String,
-            env:     'JULIE_API_BASE_URL'
+            env:     'BITBUCKET_API_BASE_URL'
         },
         basicAuthUser: {
             doc:     'The bitbucket API basic http auth user.',
             default: null,
             format:  String,
-            env:     'JULIE_API_BASIC_AUTH_USER'
+            env:     'BITBUCKET_API_BASIC_AUTH_USER'
         },
         basicAuthKey: {
             doc:     'The bitbucket API basic http auth password.',
             default: null,
             format:  String,
-            env:     'JULIE_API_BASIC_AUTH_PASSWORD'
+            env:     'BITBUCKET_API_BASIC_AUTH_PASSWORD'
         }
     }
 });
