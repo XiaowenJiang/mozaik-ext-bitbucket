@@ -2,10 +2,8 @@ import request from 'superagent';
 import Promise from 'bluebird';
 import cache   from 'memory-cache';
 import config  from './config';
+import chalk   from 'chalk';
 require('superagent-bluebird-promise');
-
-
-const API_BASE_URL = 'http://api.openweathermap.org/data/2.5';
 
 
 /**
@@ -14,71 +12,32 @@ const API_BASE_URL = 'http://api.openweathermap.org/data/2.5';
 const client = mozaik => {
     mozaik.loadApiConfig(config);
 
-    const token = config.get('julie.apiToken');
+    function buildRequest(path) {
+        const url = config.get('julie.baseUrl') + path;
+        let req = request.get(url);
+
+        mozaik.logger.info(chalk.yellow(`[bitbucket] fetching from ${ url }`));
+
+        return req
+            .auth(
+                config.get('julie.basicAuthUser'),
+                config.get('julie.basicAuthKey')
+            )
+            .promise()
+            .catch(error => {
+                mozaik.logger.error(chalk.red(`[bitbucket] ${ error }`));
+                throw error;
+            })
+        ;
+    }
 
     const methods = {
-        current(params) {
-            const { city, country, lang } = params;
-            const cacheKey = `weather.current.${city}.${country}.${lang}`;
-
-            if (cache.get(cacheKey) !== null) {
-                return new Promise((resolve) => {
-                    resolve(cache.get(cacheKey));
-                });
-            }
-
-            return request.get(`${API_BASE_URL}/weather?lang=${lang}&q=${city},${country}&appid=${token}`)
-                .promise()
-                .then((res) => {
-                    cache.put(cacheKey, res.body, 1800000);
-
-                    return res.body;
-                })
-            ;
-        },
-
-        forecast(params) {
-            const { city, country, lang, limit } = params;
-            const cacheKey = `weather.forecast.${city}.${country}.${lang}.${limit}`;
-
-            if (cache.get(cacheKey) !== null) {
-                return new Promise((resolve) => {
-                    resolve(cache.get(cacheKey));
-                });
-            }
-
-            return request.get(`${API_BASE_URL}/forecast/daily?mode=json&cnt=${limit}&lang=${lang}&q=${city},${country}&appid=${token}`)
-                .promise()
-                .then((res) => {
-                    cache.put(cacheKey, res.body.list, 1800000);
-
-                    return res.body.list;
-                })
-            ;
-        },
-
-        combined(params) {
-            const { city, country, lang, limit } = params;
-            const cacheKey = `weather.combined.${city}.${country}.${lang}.${limit}`;
-
-            if (cache.get(cacheKey) !== null) {
-                return new Promise((resolve) => {
-                    resolve(cache.get(cacheKey));
-                });
-            }
-
-            return Promise.props({
-                current:  methods.current(params),
-                forecast: methods.forecast(params)
-            })
-                .then((res) => {
-                    cache.put(cacheKey, res, 1800000);
-
-                    return res;
-                })
+        sample(params) {
+            return buildRequest(`rest/api/1.0/projects/${ params.project }/repos/${ params.repo }/pull-requests?limit=100`)
+                .then(res => res.body.values)
             ;
         }
-    };
+      };
 
     return methods;
 };
