@@ -8,6 +8,10 @@ class PullRequest extends Component {
         const author = pullRequest.author.user.displayName;
         return (
             <div className="list__item bitbucket__pull-request">
+                <i className="fa fa-arrow-right" aria-hidden="true"/>
+                <span className="bitbucket__pull-request__to">
+                    { pullRequest.toRef.displayId }
+                </span>
                 <span className="bitbucket__pull-request__id">
                     { pullRequest.id }
                 </span>
