@@ -26,7 +26,6 @@ class PullRequests extends Component {
     }
 
     onApiData(pulls) {
-        console.log(pulls);
         this.setState({ pulls });
     }
 

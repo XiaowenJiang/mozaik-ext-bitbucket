@@ -1,13 +1,8 @@
-# Mozaïk weather widgets
+# Mozaïk bitbucket widgets
 
-[![License][license-image]][license-url]
-[![Travis CI][travis-image]][travis-url]
-[![NPM version][npm-image]][npm-url]
-[![Dependencies][gemnasium-image]][gemnasium-url]
-[![Coverage Status][coverage-image]][coverage-url]
 ![widget count][widget-count-image]
 
-## Weather Client Configuration
+## Bitbucket Client Configuration
 
 In order to use the Mozaïk weather widgets, you **must** configure its **client**.
 
@@ -15,7 +10,9 @@ In order to use the Mozaïk weather widgets, you **must** configure its **client
 
 key     | env key           | required | description
 --------|-------------------|----------|-----------------------------------
-`token` | WEATHER_API_TOKEN | yes      | *openweathermap api token*
+`baseUrl` | BITBUCKET_API_BASE_URL | yes | *bitbucket website base url*
+`basicAuthUser` | BITBUCKET_API_BASIC_AUTH_USER | yes | *bitbucket username*
+`basicAuthKey` | BITBUCKET_API_BASIC_AUTH_PASSWORD | yes | *bitbucket key generated from personal account*
 
 #### using `config.js`
 
@@ -23,8 +20,10 @@ key     | env key           | required | description
 {
   //…
   api: {
-    weather: {
-      apiToken: 'secret_api_token'
+    bitbucket: {
+      baseUrl: 'your_url',
+      basicAuthUser: 'username',
+      basicAuthKey: 'auth_key'
     }
   }
 }
@@ -32,63 +31,30 @@ key     | env key           | required | description
 
 #### using environment variable
 
-Simply set **WEATHER_API_TOKEN** env variable, using `.env` or manually.
+Simply set **BITBUCKET_API_BASE_URL** env variable, using `.env` or manually.
 
-## Weather — Weather
+## Bitbucket Pull Requests
 
-> Show weather for given city/country
+> Show a list of pull requests in certain repository
 
-![clock](https://raw.githubusercontent.com/plouc/mozaik-ext-weather/master/preview/weather.weather.png)
 
 ### parameters
 
 key       | required | description
 ----------|----------|----------------------------------------------------
-`city`    | yes      | *The city you want to display weather for.*
-`country` | yes      | *The country you want to display weather for.*
-`lang`    | no       | *Lang used to display weather info. Defaults to `en`.*
-`limit`   | no       | *Limit displayed days. Defaults to `3`.*
+`project` | yes      | *bitbucket project name*
+`repo`    | yes      | *bitbucket repository's name*
 
 ### usage
 
 ```javascript
-{
-    type:    'weather.weather',
-    city:    'Paris',
-    country: 'FR',
-    lang:    'fr',
-    limit:   2,
-    columns: 1, rows: 1,
-    x: 0, y: 0
-},
-{
-    type:    'weather.weather',
-    city:    'Tokyo',
-    country: 'JP',
-    lang:    'en',
-    limit:   3,
-    columns: 1, rows: 1,
-    x: 1, y: 0
-},
-{
-    type:    'weather.weather',
-    city:    'Barcelona',
-    country: 'ES',
-    lang:    'es',
-    limit:   4,
-    columns: 1, rows: 1,
-    x: 2, y: 0
-}
+  {
+      type: 'bitbucket.pull_requests',
+      project: 'project_name',
+      repo: 'repo_name',
+      columns: 1, rows: 1,
+      x: 2, y: 1
+  }
 ```
 
-[license-image]: https://img.shields.io/github/license/plouc/mozaik-ext-weather.svg?style=flat-square
-[license-url]: https://github.com/plouc/mozaik-ext-weather/blob/master/LICENSE.md
-[travis-image]: https://img.shields.io/travis/plouc/mozaik-ext-weather.svg?style=flat-square
-[travis-url]: https://travis-ci.org/plouc/mozaik-ext-weather
-[npm-image]: https://img.shields.io/npm/v/mozaik-ext-weather.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/mozaik-ext-weather
-[gemnasium-image]: https://img.shields.io/gemnasium/plouc/mozaik-ext-weather.svg?style=flat-square
-[gemnasium-url]: https://gemnasium.com/plouc/mozaik-ext-weather
-[coverage-image]: https://img.shields.io/coveralls/plouc/mozaik-ext-weather.svg?style=flat-square
-[coverage-url]: https://coveralls.io/github/plouc/mozaik-ext-weather
 [widget-count-image]: https://img.shields.io/badge/widgets-x1-green.svg?style=flat-square
